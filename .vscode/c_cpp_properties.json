@@ -11,7 +11,7 @@
             "cStandard": "c17",
             "cppStandard": "gnu++17",
             "intelliSenseMode": "linux-gcc-x64",
-            "compilerArgs": ["-I /usr/local/boost_1_81_0"]
+            "compilerArgs": [""]
         }
     ],
     "version": 4
