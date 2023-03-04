@@ -1,15 +1,15 @@
 # FractalPlot
-a C++ command line program to generate mandelbrot and Newton fractal images.
+A C++ command line program to generate Mandelbrot and Newton fractal images.
 
 MandelBrot Plot :
   ![mandelbrot_8000_50](https://user-images.githubusercontent.com/84465552/218670477-5d80f7e5-6488-4e05-95cb-c8f3096cac2a.jpeg)
 
-Newton fractal plot :
+Newton fractal plot (z^3 - 1):
 ![Newton_2048_30](https://user-images.githubusercontent.com/84465552/222930147-2e633a5e-21cd-405f-adfb-d8130911b493.jpg)
 
 
 ## HOW TO COMPILE IT :
-g++ used to compile it like this :   </br>
+g++ is used to compile it :   </br>
 g++ -fopenmp -o fractalplot *.cpp  </br>
 -fopenmp option is used to parallelize it with openmp.
 
