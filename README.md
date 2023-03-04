@@ -1,8 +1,12 @@
 # FractalPlot
 a C++ command line program to generate mandelbrot and Newton fractal images.
 
+MandelBrot Plot :
   ![mandelbrot_8000_50](https://user-images.githubusercontent.com/84465552/218670477-5d80f7e5-6488-4e05-95cb-c8f3096cac2a.jpeg)
-![Newton_2048_100](https://user-images.githubusercontent.com/84465552/222930055-4e970119-82e1-4930-aa36-7543219b01a5.jpg)
+
+Newton fractal plot :
+![Newton_2048_30](https://user-images.githubusercontent.com/84465552/222930147-2e633a5e-21cd-405f-adfb-d8130911b493.jpg)
+
 
 ## HOW TO COMPILE IT :
 g++ used to compile it like this :   </br>
@@ -24,4 +28,4 @@ please use ./fractalplot -h to get help.
 
 ./fractalplot -t Newton -w 4.0
 
-./fractalplot -t Newton -w 0.0000005 -x 0.00
+./fractalplot -t Newton -w 4.0 -s 2048 -i 30
