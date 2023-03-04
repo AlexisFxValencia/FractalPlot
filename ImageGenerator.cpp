@@ -37,10 +37,14 @@ void ImageGenerator::parse_params(int argc, char *argv[]){
           case 's': 
             N_pixels = stoi(optarg);
             printf("Image size is set to %i pixels \n", N_pixels);
+            set_image_name();
+            img.Init(N_pixels, N_pixels, img_name, white);
             break;
           case 'i': 
             max_iteration = stoi(optarg);
-            printf("Maximum number of iterations isset to %i \n", max_iteration);
+            printf("Maximum number of iterations isset to %i \n", max_iteration);            
+            set_image_name();
+            img.SetFileName(img_name);
             break;
           case 'x': 
             center.x = stof(optarg);
