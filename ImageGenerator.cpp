@@ -6,16 +6,21 @@ ImageGenerator::ImageGenerator(){
     center = Point(-0.5, 0.0);
     width = 2.0;
     N_pixels = 512;
+    fractal_type = "Mandelbrot";
     white.SetColor(255, 255, 255);
     black.SetColor(0, 0, 0); 
-    img_name = "Newton_" + to_string(N_pixels) + "_" + to_string(max_iteration) + ".bmp";
+    set_image_name();
     img.Init(N_pixels, N_pixels, img_name, white);
+
 }
 
+void ImageGenerator::set_image_name(){
+    img_name = fractal_type + "_" + to_string(N_pixels) + "_" + to_string(max_iteration) + ".bmp";
+}
 
 void ImageGenerator::parse_params(int argc, char *argv[]){
     int opt;
-  while((opt = getopt(argc, argv, "hs:i:x:y:w:")) != -1) 
+  while((opt = getopt(argc, argv, "hs:i:x:y:w:t:")) != -1) 
   { 
       switch(opt) 
       { 
@@ -26,6 +31,7 @@ void ImageGenerator::parse_params(int argc, char *argv[]){
             printf("-x: x-coordinate of the view's center. Default parameter is %f \n", center.x);
             printf("-y: y-coordinate of the view's center. Default parameter is %f \n", center.y);            
             printf("-w: width of the view. Default parameter is %f \n", width);
+            printf("-t: type of fractal (Mandelbrot or Newton)");
             cout << endl;
             break;
           case 's': 
@@ -48,6 +54,12 @@ void ImageGenerator::parse_params(int argc, char *argv[]){
             width = stof(optarg);
             printf("The width of the view is set to %f \n", width);
             break;
+          case 't':
+            fractal_type = optarg;
+            set_image_name();
+            img.SetFileName(img_name);
+            cout << "The fractal type of the view is set to " << fractal_type << "."<< endl;
+            break;
       } 
   }     
   // optind is for the extra arguments
@@ -60,7 +72,12 @@ void ImageGenerator::parse_params(int argc, char *argv[]){
 int ImageGenerator::compute_one_pixel(int x, int y){
   float x_normalized = ((float)x/(float)N_pixels)*width + center.x - width/2;
   float y_normalized = ((float)(N_pixels-y)/(float)N_pixels)*width + center.y - width/2;
-  int nb_iterations = frctl.Mandelbrot_finite(x_normalized, y_normalized, max_iteration);
+  int nb_iterations;
+  if (fractal_type=="Mandelbrot"){
+    nb_iterations = frctl.Mandelbrot_finite(x_normalized, y_normalized, max_iteration);
+  }else if (fractal_type=="Newton"){
+    nb_iterations = frctl.Newton_finite(x_normalized, y_normalized, max_iteration);
+  }
   return nb_iterations;  
 }
 

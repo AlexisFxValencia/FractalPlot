@@ -26,9 +26,11 @@ class ImageGenerator{
         RGBColor black; 
         string img_name;
         Image img;
+        string fractal_type;
 
         ImageGenerator();
         void parse_params(int argc, char *argv[]); 
+        void set_image_name();
         void generate_image();
         int compute_one_pixel(int x, int y);
         RGBColor choose_color(int x, int y, int nb_iterations);

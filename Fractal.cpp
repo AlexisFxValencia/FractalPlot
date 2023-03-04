@@ -3,29 +3,47 @@
 Fractal::Fractal(){
 }
 
-int Fractal::Newton_finite(float x_0, float y_0, int max_iteration){
-  float x = 0.0;
-  float y = 0.0;
-  int nb_iterations = 0;
-  while (x*x + y*y <= 4.0 && nb_iterations < max_iteration){
-    float x_temp = x*x - y*y + x_0;
-    y = 2*x*y + y_0;
-    x = x_temp;
-    nb_iterations++;
-  }
-  return nb_iterations;
+complex<double> polynom( complex<double> a){
+    return pow(a,3) - 1.0;
+} 
+
+complex<double> polynom_d( complex<double> a){
+  return 3.0*pow(a,2);
 }
 
-int Fractal::Mandelbrot_finite(float x_0, float y_0, int max_iteration){
-  float x = 0.0;
-  float y = 0.0;
-  int nb_iterations = 0;
-  while (x*x + y*y <= 4.0 && nb_iterations < max_iteration){
-    float x_temp = x*x - y*y + x_0;
-    y = 2*x*y + y_0;
-    x = x_temp;
-    nb_iterations++;
+int Fractal::Newton_finite(float x_0, float y_0, int max_iteration){
+  
+  complex<double> z = x_0 + y_0*1i;
+  vector<complex<double>> roots;
+  complex<double> r1 = 1+1i;
+  complex<double> r2 = -0.5 + 0.5*sqrt(3)*1i;
+  complex<double> r3 = -0.5 - 0.5*sqrt(3)*1i;
+  roots.push_back(r1);
+  roots.push_back(r2);
+  roots.push_back(r3);
+  int nb_iterations;
+  double tolerance = 0.0001;
+
+  for (nb_iterations = 0; nb_iterations < max_iteration; nb_iterations++){
+    z -=(polynom(z)/polynom_d(z));
+    for (int i = 0; i < roots.size(); i++){
+      complex<double> difference = z - roots[i];       
+      if (abs(real(difference)) < tolerance && abs(imag(difference)) < tolerance){
+        return nb_iterations;
+      }
+    }
   }
+  return max_iteration;
+}
+
+int Fractal::Mandelbrot_finite(float x_c, float y_c, int max_iteration){
+  complex<double> z(0.0, 0.0);
+  complex<double> z_c(x_c, y_c);
+  int nb_iterations = 0;
+  while (norm(z) <= 4.0 && nb_iterations < max_iteration){
+    z = z*z + z_c;
+    nb_iterations++;
+   }
   return nb_iterations;
 }
 

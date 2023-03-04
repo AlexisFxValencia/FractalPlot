@@ -1,0 +1,5 @@
+cf. https://math.stackexchange.com/questions/2181175/value-to-use-as-center-of-mandelbrot-set-zoom
+
+./fractalplot -x -0.749 -y 0.1 -w 0.005
+
+fractalplot -t Newton -w 0.0000005 -x 0.00
