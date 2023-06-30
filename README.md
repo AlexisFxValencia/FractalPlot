@@ -13,7 +13,7 @@ g++ is used to compile it :   </br>
 g++ -fopenmp -o fractalplot *.cpp  </br>
 -fopenmp option is used to parallelize it with openmp.
 
-## HOW USE IT (for now only in LINUX) :
+## HOW USE IT (only on LINUX for now) :
 a typical command : </br>
 ./fractalplot -s 1024 -i 50 </br>
 s : for the size in pixel of the width and height of the generated image. </br>
